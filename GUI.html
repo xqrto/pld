@@ -9,9 +9,61 @@
         SINGLEINSTANCE="yes"
         WINDOWSTATE="normal"
     />
+    <style>
+        body {
+            font-family: "Segoe UI", sans-serif;
+            background-color: #0a0a0a;
+            color: #00ff00;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h2 {
+            margin-top: 0;
+            font-size: 28px;
+            color: #00ff7f;
+        }
+
+        p {
+            margin: 5px 0;
+            font-size: 14px;
+        }
+
+        hr {
+            border: 1px solid #00ff7f;
+            margin: 20px 0;
+        }
+
+        .btn {
+            width: 70%;
+            margin: 8px 0;
+            padding: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: linear-gradient(90deg, #00ff7f, #00cc66);
+            color: #000;
+        }
+
+        .btn:hover {
+            background: linear-gradient(90deg, #00cc66, #00ff7f);
+            transform: scale(1.05);
+        }
+
+        footer {
+            margin-top: 20px;
+            font-size: 12px;
+            color: #00cc66;
+        }
+    </style>
+
     <script language="VBScript">
         Sub window_onload
-            CenterWindow 400, 400
+            CenterWindow 450, 500
         End Sub
 
         Sub CenterWindow(w, h)
@@ -29,16 +81,21 @@
         End Sub
     </script>
 </head>
-<body style="font-family:Segoe UI; background-color:#111; color:#0f0; text-align:center;">
+<body>
     <h2>Mod Loader GUI</h2>
     <p>ID: (6353302823648)</p>
     <p>Made by xqrto</p>
     <p>Powered by (xylo by xqrto)</p>
-    <hr style="border-color:#0f0;"></hr>
-    <button style="width:80%;margin:5px;" onclick="click_btn(1)">Inject(1)</button><br>
-    <button style="width:80%;margin:5px;" onclick="click_btn(2)">Select process (2)</button><br>
-    <button style="width:80%;margin:5px;" onclick="click_btn(3)">Remove DLL (3)</button><br>
-    <button style="width:80%;margin:5px;" onclick="click_btn(4)">Add DLL (4)</button><br>
-    <button style="width:80%;margin:5px;" onclick="click_btn(5)">About (5)</button><br>
+    <hr>
+
+    <button class="btn" onclick="click_btn(1)">Inject (1)</button><br>
+    <button class="btn" onclick="click_btn(2)">Select Process (2)</button><br>
+    <button class="btn" onclick="click_btn(3)">Remove DLL (3)</button><br>
+    <button class="btn" onclick="click_btn(4)">Add DLL (4)</button><br>
+    <button class="btn" onclick="click_btn(5)">About (5)</button>
+
+    <footer>
+        &copy; 2025 xqrto. All rights reserved.
+    </footer>
 </body>
 </html>
