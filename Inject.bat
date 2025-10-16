@@ -182,3 +182,13 @@ goto end
 del "%~dp0data\temp\bin\xylo.exe"
 del "%~dp0data\src\path.var"
 
+::Made by xqrto 
+::xylo copy right (https://github.com/xqrto/G4mH1x/blob/main/Me/About.txt)
+
+
+::© 2025 [Your Name or Company]. 
+::All rights reserved. No part of this script may be copied,
+::reproduced, distributed, modified, or incorporated into other projects without prior written permission.
+
+
+
