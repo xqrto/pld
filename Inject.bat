@@ -191,4 +191,9 @@ del "%~dp0data\src\path.var"
 ::reproduced, distributed, modified, or incorporated into other projects without prior written permission.
 
 
+::Note:
+::If the launcher GUI is closed but you have clicked on start, 
+::the injector itself cannot be found in the running processes 
+::because it is not an application itself and gets a random title and is not running as the main treath.
+
 
