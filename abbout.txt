@@ -5,15 +5,6 @@ This is xylo (https://github.com/xqrto/G4mH1x/tree/main/WtC/Type%3DInjector/xylo
 It is freely available and works entirely with arguments. Unfortunately,
 my eject function is buggy now for the inject.bat script. 
  
-It is supposed to make a complete injector like my others, 
-but without a GUI, as I found that applications are sometimes too large.
-That's why it is 1. The file that does everything.
-
-The file creates the data folder in which everything is,
-the xylo.exe, the DLLs and everything else 
-(you don't have to adjust anything in the folder because the batch file itself does everything),
-just start it.
- 
-DLLs can be added in 2 ways: 
-1. Drop the dll into the batch file. 
-2. Select "add dll" in the console.
+Everything except the pure injection is done in 
+HTML + powershell + batch 
+it is a simple injector that reinstalls itself if it is damaged
