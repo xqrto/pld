@@ -13,7 +13,7 @@
         body {
             font-family: "Segoe UI", sans-serif;
             background-color: #0a0a0a;
-            color: #00ff00;
+            color: #ff0000;
             text-align: center;
             margin: 0;
             padding: 20px;
@@ -22,7 +22,7 @@
         h2 {
             margin-top: 0;
             font-size: 28px;
-            color: #00ff7f;
+            color: #ff0000;
         }
 
         p {
@@ -31,7 +31,7 @@
         }
 
         hr {
-            border: 1px solid #00ff7f;
+            border: 1px solid #ff0000;
             margin: 20px 0;
         }
 
@@ -45,25 +45,25 @@
             border-radius: 12px;
             cursor: pointer;
             transition: all 0.3s ease;
-            background: linear-gradient(90deg, #00ff7f, #00cc66);
+            background: linear-gradient(90deg, #ff0000, #cc0000);
             color: #000;
         }
 
         .btn:hover {
-            background: linear-gradient(90deg, #00cc66, #00ff7f);
+            background: linear-gradient(90deg, #cc0000, #ff0000);
             transform: scale(1.05);
         }
 
         footer {
             margin-top: 20px;
             font-size: 12px;
-            color: #00cc66;
+            color: #cc0000;
         }
     </style>
 
     <script language="VBScript">
         Sub window_onload
-            CenterWindow 450, 500
+            CenterWindow 450, 600
         End Sub
 
         Sub CenterWindow(w, h)
@@ -74,7 +74,7 @@
         Sub click_btn(n)
             Dim fso, f
             Set fso = CreateObject("Scripting.FileSystemObject")
-            Set f = fso.CreateTextFile("mod_choice.txt", True)
+            Set f = fso.CreateTextFile("choice.var", True)
             f.Write n
             f.Close
             window.close
@@ -82,8 +82,8 @@
     </script>
 </head>
 <body>
-    <h2>Mod Loader GUI</h2>
-    <p>ID: (6353302823648)</p>
+    <h2>XQRTO`s</h2>
+    <p>DLL Injector</p>
     <p>Made by xqrto</p>
     <p>Powered by (xylo by xqrto)</p>
     <hr>
@@ -94,8 +94,5 @@
     <button class="btn" onclick="click_btn(4)">Add DLL (4)</button><br>
     <button class="btn" onclick="click_btn(5)">About (5)</button>
 
-    <footer>
-        &copy; 2025 xqrto. All rights reserved.
-    </footer>
 </body>
 </html>
