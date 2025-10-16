@@ -1,6 +1,7 @@
 if not exist %~dp0data goto makeall
 cd "%~dp0"
 :stt
+del "%~dp0choice.var" /Q
 color c
 echo off
 set "totl=%random%%random%%random%"
@@ -39,6 +40,7 @@ exit /b
 
 {
     :start
+    set menu=6
     goto main
     [
         {
@@ -75,6 +77,7 @@ call "%~dp0data\src\get"
 goto inject
 ]
 :mkproc
+set menu=6
 cls
 echo enter Process name
 echo (notepad.exe)
@@ -106,7 +109,7 @@ goto injectet
 //
 [
 :adddlll
-
+set menu=6
 set "psCommand=Add-Type -AssemblyName System.Windows.Forms; $ofd = New-Object System.Windows.Forms.OpenFileDialog; $ofd.Filter='DLL files (*.dll)|*.dll'; $ofd.InitialDirectory=[Environment]::GetFolderPath('Desktop'); if ($ofd.ShowDialog() -eq [System.Windows.Forms.DialogResult]::OK) { Write-Output $ofd.FileName }"
 for /f "usebackq delims=" %%i in (`powershell -sta -command "%psCommand%"`) do (
     set "dllpath=%%i"
@@ -116,6 +119,7 @@ copy "%dllpath%" /ziel "%~dp0data\dlls\%dllname%.dll" /Y
 goto stt
     {
         :removedll
+        set menu=6
         cls
         dir "%~dp0data\dlls" /B
         for /f "usebackq delims=" %%i in (`powershell -NoProfile -Command "[void][Reflection.Assembly]::LoadWithPartialName('Microsoft.VisualBasic'); [Microsoft.VisualBasic.Interaction]::InputBox('enter Dll name:','Remove','')"`) do set "dname=%%i"
@@ -149,6 +153,7 @@ goto stt
 //
 [
 :abt
+set menu=6
 setlocal ENABLEDELAYEDEXPANSION
 set "target=%~dp0data\src\abt.txt"
 set "get=https://github.com/xqrto/pld/raw/main/abbout.txt"
