@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mod Loader by xqrto</title>
+    <HTA:APPLICATION
+        ID="modgui"
+        BORDER="thin"
+        SCROLL="no"
+        SINGLEINSTANCE="yes"
+        WINDOWSTATE="normal"
+    />
+    <script language="VBScript">
+        Sub window_onload
+            CenterWindow 400, 400
+        End Sub
+
+        Sub CenterWindow(w, h)
+            window.resizeTo w, h
+            window.moveTo (screen.availWidth - w) / 2, (screen.availHeight - h) / 2
+        End Sub
+
+        Sub click_btn(n)
+            Dim fso, f
+            Set fso = CreateObject("Scripting.FileSystemObject")
+            Set f = fso.CreateTextFile("mod_choice.txt", True)
+            f.Write n
+            f.Close
+            window.close
+        End Sub
+    </script>
+</head>
+<body style="font-family:Segoe UI; background-color:#111; color:#0f0; text-align:center;">
+    <h2>Mod Loader GUI</h2>
+    <p>ID: (6353302823648)</p>
+    <p>Made by xqrto</p>
+    <p>Powered by (xylo by xqrto)</p>
+    <hr style="border-color:#0f0;"></hr>
+    <button style="width:80%;margin:5px;" onclick="click_btn(1)">Inject(1)</button><br>
+    <button style="width:80%;margin:5px;" onclick="click_btn(2)">Select process (2)</button><br>
+    <button style="width:80%;margin:5px;" onclick="click_btn(3)">Remove DLL (3)</button><br>
+    <button style="width:80%;margin:5px;" onclick="click_btn(4)">Add DLL (4)</button><br>
+    <button style="width:80%;margin:5px;" onclick="click_btn(5)">About (5)</button><br>
+</body>
+</html>
