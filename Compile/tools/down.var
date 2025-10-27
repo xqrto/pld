@@ -1,0 +1,293 @@
+
+
+
+
+
+exit
+
+:Cwrite
+@echo off
+powershell Write-Host '%1' -fo '%2';
+goto end
+
+:BrowseFile
+@echo off
+for /f "delims=" %%a in ('powershell -NoProfile -Command "Add-Type -AssemblyName System.Windows.Forms; $ofd = New-Object System.Windows.Forms.OpenFileDialog; $ofd.Filter = '%1 (*.%2)|*.%2'; $ofd.InitialDirectory = [Environment]::GetFolderPath('Desktop'); if($ofd.ShowDialog() -eq 'OK'){ $ofd.FileName }"') do set "Result=%%a"
+goto end
+
+:BrowseFolder
+@echo off
+for /f "delims=" %%a in ('powershell -NoProfile -Command "Add-Type -AssemblyName System.Windows.Forms; $fbd = New-Object System.Windows.Forms.FolderBrowserDialog; $fbd.Description = '%1'; if($fbd.ShowDialog() -eq 'OK'){ $fbd.SelectedPath }"') do set "Result=%%a"
+goto end
+
+:zip
+@echo off
+powershell -Command "Compress-Archive -Path '%1' -DestinationPath '%2' -Force"
+goto end
+
+:unzip
+@echo off
+powershell -Command "Expand-Archive -Path '%1' -DestinationPath '%2' -Force"
+goto end
+
+
+:messagebox
+@echo off
+powershell -Command "Add-Type -AssemblyName System.Windows.Forms; [System.Windows.Forms.MessageBox]::Show('%2', '%1')"
+goto end
+
+:inputBox
+@echo off
+for /f "delims=" %%A in (
+  'powershell -NoProfile -Command "Add-Type -AssemblyName System.Windows.Forms; Add-Type -AssemblyName System.Drawing; $form = New-Object System.Windows.Forms.Form; $form.Text = \"%1\"; $form.Size = New-Object System.Drawing.Size(300,150); $form.StartPosition = \"CenterScreen\"; $form.FormBorderStyle = 'FixedDialog'; $form.MaximizeBox = $false; $form.MinimizeBox = $false; $label = New-Object System.Windows.Forms.Label; $label.Text = \"%2\"; $label.Location = New-Object System.Drawing.Point(10,10); $label.AutoSize = $true; $form.Controls.Add($label); $textbox = New-Object System.Windows.Forms.TextBox; $textbox.Location = New-Object System.Drawing.Point(10,40); $textbox.Size = New-Object System.Drawing.Size(260,20); $form.Controls.Add($textbox); $okButton = New-Object System.Windows.Forms.Button; $okButton.Text = \"%3\"; $okButton.Location = New-Object System.Drawing.Point(100,70); $okButton.Add_Click({ $form.Tag = $textbox.Text; $form.Close() }); $form.Controls.Add($okButton); $form.ShowDialog() | Out-Null; Write-Output $form.Tag"'
+) do set "result=%%A"
+goto end
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+:MasketinputBox
+for /f "delims=" %%A in (
+  'powershell -NoProfile -Command "Add-Type -AssemblyName System.Windows.Forms; Add-Type -AssemblyName System.Drawing; $form = New-Object System.Windows.Forms.Form; $form.Text = \"%1\"; $form.Size = New-Object System.Drawing.Size(300,150); $form.StartPosition = \"CenterScreen\"; $form.FormBorderStyle = 'FixedDialog'; $form.MaximizeBox = $false; $form.MinimizeBox = $false; $label = New-Object System.Windows.Forms.Label; $label.Text = \"%2\"; $label.Location = New-Object System.Drawing.Point(10,10); $label.AutoSize = $true; $form.Controls.Add($label); $textbox = New-Object System.Windows.Forms.TextBox; $textbox.Location = New-Object System.Drawing.Point(10,40); $textbox.Size = New-Object System.Drawing.Size(260,20); $textbox.UseSystemPasswordChar = $true; $form.Controls.Add($textbox); $okButton = New-Object System.Windows.Forms.Button; $okButton.Text = \"%3\"; $okButton.Location = New-Object System.Drawing.Point(100,70); $okButton.Add_Click({ $form.Tag = $textbox.Text; $form.Close() }); $form.Controls.Add($okButton); $form.ShowDialog() | Out-Null; Write-Output $form.Tag"'
+) do set "result=%%A"
+goto end
+
+:ProgressBar
+powershell -NoProfile -Command "Add-Type -AssemblyName System.Windows.Forms; Add-Type -AssemblyName System.Drawing; 
+$form = New-Object System.Windows.Forms.Form; 
+$form.Text = '%1'; 
+$form.Size = New-Object System.Drawing.Size(300,100); 
+$form.StartPosition = 'CenterScreen'; 
+
+$progressBar = New-Object System.Windows.Forms.ProgressBar; 
+$progressBar.Location = New-Object System.Drawing.Point(10,20); 
+$progressBar.Size = New-Object System.Drawing.Size(260,23); 
+$progressBar.Minimum = 0; 
+$progressBar.Maximum = 100; 
+$form.Controls.Add($progressBar); 
+
+$form.Show();
+
+for ($i = 0; $i -le 100; $i++) { 
+    $progressBar.Value = $i; 
+    Start-Sleep -Milliseconds %2; 
+    [System.Windows.Forms.Application]::DoEvents() 
+}
+
+$form.Close();"
+                                                                                                                                                                                                                                                                                                                      
+:ConfirmBox
+@echo off
+for /f "delims=" %%A in (
+  'powershell -NoProfile -Command "Add-Type -AssemblyName System.Windows.Forms; $r = [System.Windows.Forms.MessageBox]::Show('%2', '%1', 'YesNo', 'Question'); Write-Output $r"'
+) do set "result=%%A"
+goto end
+
+:PlaySound
+@echo off
+powershell -c "(New-Object Media.SoundPlayer '%1').PlaySync()"
+goto end
+
+:CountdownBox
+@echo off
+powershell -NoProfile -Command ^
+"Add-Type -AssemblyName System.Windows.Forms; ^
+$form = New-Object Windows.Forms.Form; ^
+$form.Text = '%1'; ^
+$form.Size = '300,100'; ^
+$form.StartPosition = 'CenterScreen'; ^
+$label = New-Object Windows.Forms.Label; ^
+$label.Font = 'Segoe UI,14'; ^
+$label.Dock = 'Fill'; ^
+$label.TextAlign = 'MiddleCenter'; ^
+$form.Controls.Add($label); ^
+for ($i = %2; $i -ge 0; $i--) { ^
+  $label.Text = 'Fenster schließt in ' + $i + ' Sekunde(n)...'; ^
+  [System.Windows.Forms.Application]::DoEvents(); ^
+  Start-Sleep -Seconds 1 ^
+}; ^
+$form.Close()"
+goto end
+
+:LockInputBox
+@echo off
+for /f "delims=" %%A in (
+  'powershell -NoProfile -Command "Add-Type -AssemblyName System.Windows.Forms; $f = New-Object Windows.Forms.Form; $f.Text='%1'; $f.Size='300,150'; $f.StartPosition='CenterScreen'; $l = New-Object Windows.Forms.Label; $l.Text='%2'; $l.AutoSize = $true; $l.Location='10,10'; $tb = New-Object Windows.Forms.TextBox; $tb.Location='10,40'; $tb.Size='260,20'; $tb.ShortcutsEnabled = $false; $b = New-Object Windows.Forms.Button; $b.Text='%3'; $b.Location='100,70'; $b.Add_Click({ $f.Tag = $tb.Text; $f.Close() }); $f.Controls.AddRange(@($l,$tb,$b)); $f.ShowDialog() | Out-Null; Write-Output $f.Tag"'
+) do set "result=%%A"
+goto end
+
+:ShowFileInfo
+@echo off
+powershell -Command "$f = Get-Item '%1'; Write-Output ('Name: ' + $f.Name + '\nSize: ' + $f.Length + ' bytes\nCreated: ' + $f.CreationTime + '\nType: ' + $f.Extension)"
+goto end
+
+:CreateFile
+@echo off
+echo %~3 | powershell -Command "Set-Content -Path '%~1\%~2'"
+goto end
+
+:CopyToClipboard
+@echo off
+echo %~1 | powershell -Command "Set-Clipboard"
+goto end
+
+:PickDate
+@echo off
+for /f "delims=" %%a in ('powershell -Command "Add-Type -AssemblyName System.Windows.Forms; $dp = New-Object Windows.Forms.DateTimePicker; $form = New-Object Windows.Forms.Form; $form.Text = 'Pick a date'; $form.Controls.Add($dp); $form.Width = 200; $form.Height = 100; $dp.Dock = 'Fill'; $form.ShowDialog() | Out-Null; $dp.Value.ToShortDateString()"') do set "result=%%a"
+goto end
+
+:Notification
+@echo off
+powershell -Command "[reflection.assembly]::loadwithpartialname('System.Windows.Forms') | Out-Null; $notify = new-object system.windows.forms.notifyicon; $notify.icon = [System.Drawing.SystemIcons]::Information; $notify.visible = $true; $notify.showballoontip(5000, '%~1', '%~2', [system.windows.forms.tooltipicon]::None)"
+goto end
+
+:Calc
+@echo off
+for /f "delims=" %%a in ('powershell -Command "[string]::Format('{0:N2}', (%1))"') do set "result=%%a"
+goto end
+
+:FileRead
+@echo off
+setlocal
+set "file=%~1"
+set "result="
+for /f "delims=" %%a in ('powershell -Command "Get-Content -Raw -Path '%file%'"') do set "result=%%a"
+endlocal & set "result=%result%"
+goto end
+
+:FileWrite
+@echo off
+powershell -Command "Set-Content -Path '%1' -Value '%2'"
+goto end
+
+:AskBox
+@echo off
+setlocal EnableDelayedExpansion
+set "args="
+set i=2
+:loop
+call set "b=%%%i%%"
+if defined b (
+    set args=!args!, '%b%'
+    set /a i+=1
+    goto loop
+)
+set "args=!args:~2!"
+for /f %%r in ('powershell -Command "Add-Type -AssemblyName System.Windows.Forms; $form = New-Object Windows.Forms.Form; $form.Text = '%1'; $form.Size = '300,150'; $label = New-Object Windows.Forms.Label; $label.Text = '%2'; $label.AutoSize = $true; $label.Location = '10,10'; $form.Controls.Add($label); $result = -1; $buttons = @( %args% ); for ($i=0; $i -lt $buttons.Count; $i++) { $btn = New-Object Windows.Forms.Button; $btn.Text = $buttons[$i]; $btn.Location = '10,' + (40 + $i*30); $btn.Tag = $i; $btn.Add_Click({ $form.Tag = $_.Source.Tag; $form.Close() }); $form.Controls.Add($btn) }; $form.ShowDialog() | Out-Null; Write-Output $form.Tag"') do (
+    endlocal & set "result=%%r"
+)
+goto end
+
+:DateTime
+@echo off
+for /f "delims=" %%d in ('powershell -Command "Get-Date -Format '%1'"') do set "result=%%d"
+goto end
+
+:Beep
+@echo off
+powershell -Command "[console]::beep(%1, %2)"
+goto end
+
+:ScreenResolution
+@echo off
+for /f "tokens=1,2 delims=," %%a in ('powershell -Command "[System.Windows.Forms.SystemInformation]::PrimaryMonitorSize.Width.ToString() + ',' + [System.Windows.Forms.SystemInformation]::PrimaryMonitorSize.Height.ToString()"') do set "result=%%a x %%b"
+goto end
+
+:MousePosition
+@echo off
+for /f "delims=" %%a in ('powershell -Command "Add-Type -AssemblyName System.Windows.Forms; $p=[System.Windows.Forms.Cursor]::Position; Write-Output \"$($p.X),$($p.Y)\""') do set "result=%%a"
+goto end
+
+:SpecialFolder
+@echo off
+setlocal EnableDelayedExpansion
+
+
+if "%~1"=="" (
+    goto end
+)
+
+for /f "delims=" %%a in (
+    'powershell -NoProfile -Command "[System.Environment]::GetFolderPath([System.Environment+SpecialFolder]::%~1)"'
+) do set "result=%%a"
+
+endlocal
+set "result=%result%"
+goto end
+
+:ChangeWallpaper
+@echo off
+powershell -Command "Add-Type -TypeDefinition 'using System; using System.Runtime.InteropServices; public class Wallpaper { [DllImport(\"user32.dll\", CharSet = CharSet.Auto)] public static extern int SystemParametersInfo(int uAction, int uParam, string lpvParam, int fuWinIni); }'; [Wallpaper]::SystemParametersInfo(20, 0, '%1', 3)"
+goto end
+
+:CreateShortcut
+@echo off
+rem Aufruf: :CreateShortcut "Zielpfad" "Verknüpfungspfad" "Beschreibung"
+powershell -Command "$WshShell = New-Object -ComObject WScript.Shell; $Shortcut = $WshShell.CreateShortcut('%2'); $Shortcut.TargetPath = '%1'; $Shortcut.Description = '%3'; $Shortcut.Save()"
+goto end
+
+:RandomNumber
+@echo off
+for /f "delims=" %%a in ('powershell -Command "Get-Random -Minimum %1 -Maximum %2"') do set "result=%%a"
+goto end
+
+:Sleep
+@echo off
+powershell -Command "Start-Sleep -Seconds %1"
+goto end
+
+:Compile
+@echo off
+set "target.exe=%2"
+set "batch_file=%1"
+set "bat_name=%3"
+set "bat_dir=%~dp1"
+Set "sed=%temp%\2exe.sed"
+copy /y "%~f0" "%sed%" >nul
+;(
+    ;(echo()
+    ;(echo(AppLaunched=cmd /c "%bat_name%")
+    ;(echo(TargetName=%target.exe%)
+    ;(echo(FILE0="%bat_name%")
+    ;(echo([SourceFiles])
+    ;(echo(SourceFiles0=%bat_dir%)
+    ;(echo([SourceFiles0])
+    ;(echo(%%FILE0%%=)
+;)>>"%sed%"
+
+iexpress /n /q /m %sed%
+del /q /f "%sed%"
+exit /b 0
+
+[Version]
+Class=IEXPRESS
+SEDVersion=3
+[Options]
+PackagePurpose=InstallApp
+ShowInstallProgramWindow=0
+HideExtractAnimation=1
+UseLongFileName=1
+InsideCompressed=0
+CAB_FixedSize=0
+CAB_ResvCodeSigning=0
+RebootMode=N
+InstallPrompt=%InstallPrompt%
+DisplayLicense=%DisplayLicense%
+FinishMessage=%FinishMessage%
+TargetName=%TargetName%
+FriendlyName=%FriendlyName%
+AppLaunched=%AppLaunched%
+PostInstallCmd=%PostInstallCmd%
+AdminQuietInstCmd=%AdminQuietInstCmd%
+UserQuietInstCmd=%UserQuietInstCmd%
+SourceFiles=SourceFiles
+
+[Strings]
+InstallPrompt=
+DisplayLicense=
+FinishMessage=
+FriendlyName=-
+PostInstallCmd=<None>
+AdminQuietInstCmd=
+goto end
+
+:end
+exit /b

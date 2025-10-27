@@ -1,0 +1,158 @@
+╔═══════════════════════════════════════════════════════╗
+                  🛠 BAT obfuscator               
+╠═══════════════════════════════════════════════════════╣
+ 💡 Results in:  "%result%"                            
+╚═══════════════════════════════════════════════════════╝
+X = NotWorking
+_________________________________________________
+📂 BrowseFile [Title] [Datatype]
+
+%xqr% :BrowseFile "Select File" exe
+_________________________________________________
+📁 BrowseFolder [Title]
+
+%xqr% :BrowseFolder "Select Folder"
+_________________________________________________
+🔗 CreateShortcut [TargetPath] [shortcut] [Description]
+
+%xqr% :CreateShortcut C:\path\Proc.exe C:\shortcut.lnk "my shortcut"
+_________________________________________________
+🎨 Cwrite [text] [color]
+
+%xqr% :Cwrite "Hello World" red
+_________________________________________________
+⚙️ Compile [infile.bat] [C:\path\to\outfilefolder]
+
+%xqr% :Compile C:\path\to\exe.exe C:\path\to\Folder
+_________________________________________________
+🖼️ ChangeWallpaper [File]
+
+%xqr% :ChangeWallpaper C:\file.jpg
+_________________________________________________
+⌨️ inputBox [title] [text] [button]
+
+%xqr% :inputBox "Title" "Enter Text" "OK"
+_________________________________________________
+🔒 MasketinputBox [title] [text] [button]
+
+%xqr% :MasketinputBox "Login" "Enter Password" "OK"
+_________________________________________________
+📁 SpecialFolder [Foldername]   X
+
+%xqr% :SpecialFolder ADMINTOOLS
+
+ADMINTOOLS
+ALTSTARTUP
+APPDATA
+BITBUCKET
+CDBURN_AREA
+COMMON_ADMINTOOLS
+COMMON_ALTSTARTUP
+COMMON_APPDATA
+COMMON_DESKTOPDIRECTORY
+COMMON_DOCUMENTS
+COMMON_FAVORITES
+COMMON_MUSIC
+COMMON_OEM_LINKS
+COMMON_PICTURES
+COMMON_PROGRAMS
+COMMON_STARTMENU
+COMMON_STARTUP
+COMMON_TEMPLATES
+COMMON_VIDEO
+COMPUTERSNEARME
+CONNECTIONS
+CONTROLS
+COOKIES
+DESKTOP
+DESKTOPDIRECTORY
+DRIVES
+FAVORITES
+FONTS
+HISTORY
+INTERNET
+INTERNET_CACHE
+LOCAL_APPDATA
+MYDOCUMENTS
+MYMUSIC
+MYPICTURES
+MYVIDEO
+NETHOOD
+NETWORK
+PERSONAL
+PRINTERS
+PRINTHOOD
+PROFILE
+PROGRAM_FILES
+PROGRAM_FILESX86
+PROGRAM_FILES_COMMON
+PROGRAM_FILES_COMMONX86
+PROGRAMS
+RECENT
+RESOURCES
+RESOURCES_LOCALIZED
+SENDTO
+STARTMENU
+STARTUP
+SYSTEM
+SYSTEMX86
+TEMPLATES
+WINDOWS
+_________________________________________________
+💬 MessageBox [title] [text]
+
+%xqr% :MessageBox "Info" "Operation Done"
+_________________________________________________
+🎲 RandomNumber [min] [max]
+
+%xqr% 1 10
+_________________________________________________
+📊 ProgressBar [title] [timemillisec]
+
+%xqr% :ProgressBar "Working..." 30
+_________________________________________________
+📦 UnZip [File] [DestinationPath]
+
+%xqr% :UnZip "C:\file.zip" "C:\output"
+_________________________________________________
+📦 Zip [Folder] [DestinationPath]
+
+%xqr% :Zip "C:\myfolder" "C:\output.zip"
+_________________________________________________
+😴 Sleep [Time in sec]
+
+%xqr% :Sleep 10
+_________________________________________________
+📃 FileRead [PathToFile]
+
+Liest Dateiinhalt in %result%
+%xqr% :FileRead "C:\notes.txt"
+_________________________________________________
+💾 FileWrite [PathToFile] [Text]
+
+Schreibt Text in Datei
+%xqr% :FileWrite "C:\notes.txt" "Hallo Welt"
+_________________________________________________
+🔁 AskBox [Title] [Message] [Button1] [Button2] [...]     X
+
+Zeigt Buttons, speichert Klick-Index in %result%
+%xqr% :AskBox "Frage" "Was tun?" "OK" "Abbrechen"
+_________________________________________________
+📅 DateTime [Format]
+
+%xqr% :DateTime "yyyy-MM-dd HH:mm:ss"
+_________________________________________________
+🔔 Beep [FrequencyHz] [DurationMS]
+
+%xqr% :Beep 1000 300
+_________________________________________________
+🖥 ScreenResolution
+
+%xqr% :ScreenResolution
+_________________________________________________
+📏 MousePosition
+
+Gibt X/Y-Koordinaten der Maus zurück
+%xqr% :MousePosition
+_________________________________________________
+
