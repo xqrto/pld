@@ -291,5 +291,5 @@ exit /b
 goto end
 
 :EXT
-.exe
+%1
 :DATA
