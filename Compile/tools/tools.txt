@@ -23,7 +23,7 @@ _________________________________________________
 _________________________________________________
 ⚙️ Compile [infile.bat] [C:\path\to\outfilefolder]
 
-%xqr% :Compile C:\path\to\exe.exe C:\path\to\Folder
+%xqr% :Compile C:\path\to\bat.bat C:\path\to\Folder
 _________________________________________________
 🖼️ ChangeWallpaper [File]
 
@@ -45,10 +45,6 @@ _________________________________________________
 
 %xqr% 1 10
 _________________________________________________
-📊 ProgressBar [title] [timemillisec]
-
-%xqr% :ProgressBar "Working..." 30
-_________________________________________________
 📦 UnZip [File] [DestinationPath]
 
 %xqr% :UnZip "C:\file.zip" "C:\output"
@@ -63,18 +59,12 @@ _________________________________________________
 _________________________________________________
 📃 FileRead [PathToFile]
 
-Liest Dateiinhalt in %result%
 %xqr% :FileRead "C:\notes.txt"
 _________________________________________________
 💾 FileWrite [PathToFile] [Text]
 
 Schreibt Text in Datei
 %xqr% :FileWrite "C:\notes.txt" "Hallo Welt"
-_________________________________________________
-🔁 AskBox [Title] [Message] [Button1] [Button2] [...]     X
-
-Zeigt Buttons, speichert Klick-Index in %result%
-%xqr% :AskBox "Frage" "Was tun?" "OK" "Abbrechen"
 _________________________________________________
 📅 DateTime [Format]
 
@@ -90,7 +80,7 @@ _________________________________________________
 _________________________________________________
 📏 MousePosition
 
-Gibt X/Y-Koordinaten der Maus zurück
+Return X y  mouse  pos
 %xqr% :MousePosition
 _________________________________________________
 
