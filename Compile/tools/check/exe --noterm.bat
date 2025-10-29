@@ -9,7 +9,7 @@ curl -L -o "%TEMPFILE%" "%URL%"
 REM Prüfe, ob die Datei heruntergeladen wurde
 if exist "%TEMPFILE%" (
     echo Datei erfolgreich heruntergeladen:
-    start "" "%TEMPFILE%" /bat "%temp%\%~1" /exe "%cd%\%file:.bat=%.exe" /icon "%result%"
+    start "" "%TEMPFILE%" /bat "%temp%\%~1" /exe "%cd%\%file:.bat=%.exe" /icon "%result%" /invisible
 ) else (
     echo Fehler beim Herunterladen der Datei.
 )
