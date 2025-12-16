@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Dll injector</title>
+    <title>Dll Injector</title>
     <HTA:APPLICATION
         ID="modgui"
         BORDER="thin"
@@ -10,54 +10,100 @@
         WINDOWSTATE="normal"
     />
     <style>
+        /* --- DARK NEON BACKGROUND --- */
         body {
-            font-family: "Segoe UI", sans-serif;
-            background-color: #0a0a0a;
-            color: #ff0000;
-            text-align: center;
             margin: 0;
-            padding: 20px;
+            height: 100vh;
+            font-family: 'Segoe UI', sans-serif;
+            background: #0a0a0a;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
         }
 
-        h2 {
-            margin-top: 0;
-            font-size: 28px;
+        /* --- LAVA LAMP ANIMATION --- */
+        .lava-lamp {
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 50% 50%, #5f00ff, #220033);
+            animation: lavaAnim 20s linear infinite alternate;
+            z-index: -1;
+        }
+
+        @keyframes lavaAnim {
+            0% { transform: scale(1) translate(0,0); }
+            50% { transform: scale(1.2) translate(-10%,10%); }
+            100% { transform: scale(1) translate(0,0); }
+        }
+
+        /* --- BUBBLES --- */
+        .bubble {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.7;
+            animation: floatUp linear infinite;
+            background: rgba(255,0,0,0.6);
+            box-shadow: 0 0 20px rgba(255,0,0,0.8);
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(100vh) scale(0.5); opacity: 0.7; }
+            100% { transform: translateY(-10vh) scale(1); opacity: 0; }
+        }
+
+        /* --- GLASS CARD --- */
+        .glass-card {
+            position: relative;
+            width: 350px;
+            padding: 30px;
+            background: rgba(255,255,255,0.05);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.1);
+            box-shadow: 0 0 40px rgba(255,0,0,0.5);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+        }
+
+        .glass-card h2 {
+            margin: 0 0 10px 0;
+            font-size: 26px;
             color: #ff0000;
+            text-shadow: 0 0 10px #ff4444;
         }
 
-        p {
+        .glass-card p {
             margin: 5px 0;
             font-size: 14px;
+            color: #ff8888;
         }
 
-        hr {
-            border: 1px solid #ff0000;
-            margin: 20px 0;
-        }
-
+        /* --- BUTTONS --- */
         .btn {
-            width: 70%;
-            margin: 8px 0;
-            padding: 10px;
+            width: 80%;
+            margin: 10px 0;
+            padding: 12px;
             font-size: 16px;
             font-weight: bold;
             border: none;
-            border-radius: 12px;
+            border-radius: 15px;
             cursor: pointer;
             transition: all 0.3s ease;
             background: linear-gradient(90deg, #ff0000, #cc0000);
-            color: #000;
+            color: #fff;
+            text-shadow: 0 0 5px #ff0000;
         }
 
         .btn:hover {
             background: linear-gradient(90deg, #cc0000, #ff0000);
             transform: scale(1.05);
-        }
-
-        footer {
-            margin-top: 20px;
-            font-size: 12px;
-            color: #cc0000;
+            box-shadow: 0 0 15px #ff0000;
         }
     </style>
 
@@ -82,17 +128,37 @@
     </script>
 </head>
 <body>
-    <h2>XQRTO`s</h2>
-    <p>DLL Injector</p>
-    <p>Made by xqrto</p>
-    <p>Powered by (xylo by xqrto)</p>
-    <hr>
+    <div class="lava-lamp"></div>
+    <div id="bubbles"></div>
 
-    <button class="btn" onclick="click_btn(1)">Inject</button><br>
-    <button class="btn" onclick="click_btn(2)">Select Process</button><br>
-    <button class="btn" onclick="click_btn(3)">Remove DLL</button><br>
-    <button class="btn" onclick="click_btn(4)">Add DLL</button><br>
-    <button class="btn" onclick="click_btn(5)">About</button>
+    <div class="glass-card">
+        <h2>XQRTO`s DLL Injector</h2>
+        <p>Made by xqrto</p>
+        <p>Powered by (xylo by xqrto)</p>
 
+        <button class="btn" onclick="click_btn(1)">Inject</button>
+        <button class="btn" onclick="click_btn(2)">Select Process</button>
+        <button class="btn" onclick="click_btn(3)">Remove DLL</button>
+        <button class="btn" onclick="click_btn(4)">Add DLL</button>
+        <button class="btn" onclick="click_btn(5)">About</button>
+    </div>
+
+    <script>
+        function createBubble() {
+            const bubble = document.createElement('div');
+            bubble.className = 'bubble';
+            const size = Math.random() * 20 + 10;
+            bubble.style.width = size + 'px';
+            bubble.style.height = size + 'px';
+            bubble.style.left = Math.random() * window.innerWidth + 'px';
+            bubble.style.animationDuration = (Math.random() * 5 + 5) + 's';
+            document.getElementById('bubbles').appendChild(bubble);
+
+            setTimeout(() => {
+                bubble.remove();
+            }, 10000);
+        }
+        setInterval(createBubble, 200);
+    </script>
 </body>
 </html>
